@@ -7,7 +7,7 @@ from main.forms import NewsLetterForm
 from main.models import NewsLetter
 
 
-class NewsLetterListView(LoginRequiredMixin, ListView):
+class NewsLetterListView(ListView):
     """ NewsLetter list edpoint """
     model = NewsLetter
     form_class = NewsLetterForm
@@ -20,11 +20,10 @@ class NewsLetterListView(LoginRequiredMixin, ListView):
         else:
             queryset = NewsLetter.objects.filter(user=user)
 
-        queryset = queryset.filter(is_published=True)
         return queryset
 
 
-class NewsLetterDetailView(LoginRequiredMixin, DetailView):
+class NewsLetterDetailView(DetailView):
     """ NewsLetter detail edpoint """
 
     model = NewsLetter
@@ -32,12 +31,12 @@ class NewsLetterDetailView(LoginRequiredMixin, DetailView):
     success_url = reverse_lazy('main:newsletter_list')
 
 
-class NewsLetterCreateView(LoginRequiredMixin, CreateView):
+class NewsLetterCreateView(CreateView):
     """ NewsLetter create edpoint """
 
     model = NewsLetter
     form_class = NewsLetterForm
-    template_name = 'newsletter_form.html'
+    template_name = 'main/newsletter_form.html'
     success_url = reverse_lazy('main:newsletter_list')
 
     def form_valid(self, form):
@@ -47,7 +46,7 @@ class NewsLetterCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class NewsLetterUpdateView(LoginRequiredMixin, UpdateView):
+class NewsLetterUpdateView(UpdateView):
     """ NewsLetter update edpoint """
 
     model = NewsLetter
@@ -56,7 +55,7 @@ class NewsLetterUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('main:newsletter_list')
 
 
-class NewsLetterDeleteView(LoginRequiredMixin, DeleteView):
+class NewsLetterDeleteView(DeleteView):
     """ NewsLetter delete edpoint """
 
     model = NewsLetter

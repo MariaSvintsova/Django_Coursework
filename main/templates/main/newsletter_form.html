@@ -1,32 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание/Редактирование рассылки</title>
+    <title>{% if view.object.pk %}Редактирование рассылки{% else %}Создание рассылки{% endif %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
         <h1>{% if view.object.pk %}Редактирование рассылки{% else %}Создание рассылки{% endif %}</h1>
-        <form method="post" novalidate>
+        <form method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="id_message">Текст сообщения</label>
-                {{ form.message }}
-            </div>
-            <div class="form-group">
-                <label for="id_frequency">Периодичность</label>
-                {{ form.frequency }}
-            </div>
-            <div class="form-group">
-                <label for="id_client">Клиенты</label>
-                {{ form.client }}
-            </div>
-            <div class="form-group">
-                <label for="id_is_published">Опубликован</label>
-                {{ form.is_published }}
-            </div>
+            {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Сохранить</button>
             <a href="{% url 'main:newsletter_list' %}" class="btn btn-secondary">Отмена</a>
         </form>

@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отображение рассылки</title>
 </head>
 <body>
-
+    <h1>Информация о рассылке</h1>
+    <ul>
+        <li><strong>Опубликована:</strong> {{ newsletter.is_published }}</li>
+        <li><strong>Время рассылки:</strong> {{ newsletter.create_time }}</li>
+        <li><strong>Дата создания:</strong> {{ newsletter.create_date }}</li>
+        <li><strong>Периодичность:</strong> {{ newsletter.frequency }}</li>
+        <li><strong>Статус:</strong> {{ newsletter.status }}</li>
+        <li><strong>Сообщение:</strong> {{ newsletter.message }}</li>
+        <li><strong>Клиенты:</strong>
+            <ul>
+                {% for client in newsletter.client.all %}
+                    <li>{{ client }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li><strong>Пользователь:</strong> {{ newsletter.user }}</li>
+    </ul>
 </body>
 </html>

@@ -50,13 +50,13 @@ class NewsLetter(models.Model):
         (LAUNCHED, 'Запущена'),
         (COMPLETED, 'Завершена')
     ]
-
+    id = models.AutoField(primary_key=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликован')
     create_time = models.TimeField(auto_now_add=True, verbose_name='Время рассылки')
     create_date = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     frequency = models.CharField(max_length=10, choices=FREQUENCY, verbose_name='Периодичность')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='Статус')
-    message = models.OneToOneField(Message, on_delete=models.CASCADE, verbose_name='Сообщение', **NULLABLE)
+    message = models.ForeignKey(Message, on_delete=models.SET_NULL, verbose_name='Сообщение', **NULLABLE)
     client = models.ManyToManyField(Client,  verbose_name='Клиент', **NULLABLE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE)
 
