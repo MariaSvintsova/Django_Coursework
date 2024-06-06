@@ -99,6 +99,7 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         client.save()
         return super(ClientCreateView, self).form_valid(form)
 
+# Надо дописать тут permissions
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """ Client update edpoint """
 
