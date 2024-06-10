@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path, include
+
+
 from main.views import NewsLetterDetailView, NewsLetterCreateView, NewsLetterUpdateView, NewsLetterDeleteView, \
     NewsLetterListView
 from main.apps import MainConfig
+from django.contrib import admin
 
 app_name = MainConfig.name
 

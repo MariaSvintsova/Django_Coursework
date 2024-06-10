@@ -1,3 +1,5 @@
+import sys
+
 from django.apps import AppConfig
 
 
@@ -6,5 +8,6 @@ class MainConfig(AppConfig):
     name = 'main'
 
     def ready(self):
-        from .tasks import start
-        start()
+        if 'runserver' in sys.argv or 'runworker' in sys.argv:
+            from .tasks import start
+            start()

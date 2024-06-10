@@ -57,7 +57,7 @@ class NewsLetter(models.Model):
     frequency = models.CharField(max_length=10, choices=FREQUENCY, verbose_name='Периодичность')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, verbose_name='Статус')
     message = models.ForeignKey(Message, on_delete=models.SET_NULL, verbose_name='Сообщение', **NULLABLE)
-    client = models.ManyToManyField(Client,  verbose_name='Клиент', **NULLABLE)
+    client = models.ManyToManyField(Client, verbose_name='Клиенты')
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE)
 
 

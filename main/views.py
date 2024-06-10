@@ -7,7 +7,7 @@ from main.forms import NewsLetterForm, ClientForm
 from main.models import NewsLetter, Client, SendAttemp
 
 
-class NewsLetterListView(ListView):
+class NewsLetterListView(LoginRequiredMixin, ListView):
     """ NewsLetter list edpoint """
     model = NewsLetter
     form_class = NewsLetterForm
@@ -15,12 +15,7 @@ class NewsLetterListView(ListView):
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_superuser or user.is_staff:
-            queryset = NewsLetter.objects.all()
-        else:
-            queryset = NewsLetter.objects.filter(user=user)
-
-        return queryset
+        return NewsLetter.objects.filter(user=user)
 
 
 class NewsLetterDetailView(LoginRequiredMixin, DetailView):
