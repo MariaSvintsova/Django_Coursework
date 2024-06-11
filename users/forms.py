@@ -14,7 +14,7 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'avatar', 'phone', 'country']
+        fields = ['email', 'first_name', 'last_name']
 
 
     def __init__(self, *args, **kwargs):

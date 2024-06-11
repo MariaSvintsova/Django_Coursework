@@ -1,8 +1,12 @@
+from random import sample
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from rest_framework import generics
+
+from blog.models import Post
 from main.forms import NewsLetterForm, ClientForm
 from main.models import NewsLetter, Client, SendAttemp
 
@@ -10,11 +14,20 @@ from main.models import NewsLetter, Client, SendAttemp
 class NewsLetterListView(LoginRequiredMixin, ListView):
     """ NewsLetter list edpoint """
     model = NewsLetter
-    form_class = NewsLetterForm
-    template_name = 'newsletter_list.html'
+    template_name = 'main/newsletter_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_newsletters'] = NewsLetter.objects.count()
+        context['active_newsletters'] = NewsLetter.objects.filter(status='created').count()
+        context['unique_clients'] = Client.objects.distinct().count()
+        all_posts = list(Post.objects.filter(is_published=True))
+        context['random_posts'] = sample(all_posts, min(len(all_posts), 3))
+        return context
 
     def get_queryset(self):
         user = self.request.user
+        newsletters = NewsLetter.objects.filter(user=user)
         return NewsLetter.objects.filter(user=user)
 
 
@@ -22,11 +35,16 @@ class NewsLetterDetailView(LoginRequiredMixin, DetailView):
     """ NewsLetter detail edpoint """
 
     model = NewsLetter
-    template_name = 'newsletter_detail.html'
+    template_name = 'main/newsletter_detail.html'
     success_url = reverse_lazy('main:newsletter_list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['send_attempts'] = self.object.send_attempts.all()
+        return context
 
-class NewsLetterCreateView(LoginRequiredMixin, CreateView):
+
+class NewsLetterCreateView(CreateView):
     """ NewsLetter create edpoint """
 
     model = NewsLetter
@@ -46,7 +64,7 @@ class NewsLetterUpdateView(LoginRequiredMixin, UpdateView):
 
     model = NewsLetter
     form_class = NewsLetterForm
-    template_name = 'newsletter_form.html'
+    template_name = 'main/newsletter_form.html'
     success_url = reverse_lazy('main:newsletter_list')
 
 
@@ -54,7 +72,7 @@ class NewsLetterDeleteView(LoginRequiredMixin, DeleteView):
     """ NewsLetter delete edpoint """
 
     model = NewsLetter
-    template_name = 'newsletter_delete.html'
+    template_name = 'main/newsletter_delete.html'
     success_url = reverse_lazy('main:newsletter_list')
 
 
@@ -122,3 +140,4 @@ class SendAttempListView(ListView):
         context['newsletter'] = "Попытки рассылки"
         context['log_list'] = SendAttemp.objects.all()
         return context
+

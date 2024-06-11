@@ -42,13 +42,12 @@ def start():
     scheduler.add_jobstore(DjangoJobStore(), 'default')
 
     scheduler.add_job(
-        call_command,
-        trigger=CronTrigger(minute='*/10'),
-        args=['send_mailing'],
-        id='send_mailing',
-        max_instances=1,
-        replace_existing=True,
-    )
+    send_mailing,
+    trigger=CronTrigger(minute='*/10'),
+    id='send_mailing',
+    max_instances=1,
+    replace_existing=True,
+)
     logger.info("Added job 'send_mailing'.")
 
     try:
