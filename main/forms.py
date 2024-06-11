@@ -27,4 +27,4 @@ class NewsLetterForm(forms.ModelForm):
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        exclude = ('name', 'user')
+        fields = ['name', 'email', 'message', 'user']

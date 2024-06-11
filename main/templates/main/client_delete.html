@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вы уверены, что хотите удалить клиента?</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Вы уверены, что хотите удалить клиента?</h1>
+        <div class="actions">
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn">Удалить</button>
+            </form>
+            <a href="{% url 'main:client_detail' object.id %}" class="cancel-btn">Отмена</a>
+        </div>
+    </div>
+</body>
+</html>

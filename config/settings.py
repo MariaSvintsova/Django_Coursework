@@ -154,9 +154,9 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
 
 
-СACHE_ENABLED = os.getenv('СACHE_ENABLED') == 'True'
+CACHE_ENABLED = os.getenv('СACHE_ENABLED') == 'True'
 
-if СACHE_ENABLED:
+if CACHE_ENABLED:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",

@@ -24,7 +24,6 @@
         }
         .list-group-item {
             background-color: #f2b2c4; /* Светло-розовый */
-        }
     </style>
 </head>
 <body>
@@ -114,11 +113,11 @@
             <span class="text-muted">&copy; 2024 Newsletter Service</span>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="{% url 'main:client_list' %}">Список клиентов</a></li>
-                <li class="list-inline-item"><a href="{% url 'main:sendattempt_list' %}">Список попыток</a></li>
+                <li class="list-inline-item"><a href="{% url 'main:sendattemp_list' %}">Список попыток</a></li>
                 <li class="list-inline-item"><a href="{% url 'main:newsletter_form' %}">Создать рассылку</a></li>
                 <li class="list-inline-item"><a href="{% url 'main:client_form' %}">Создать клиента</a></li>
-<!--                <li class="list-inline-item"><a href="{% url 'blog:post_create' %}">Создать пост</a></li>-->
-<!--                <li class="list-inline-item"><a href="{% url 'blog:post_list' %}">Список постов</a></li>-->
+                <li class="list-inline-item"><a href="{% url 'blog:post_form' %}">Создать пост</a></li>
+                <li class="list-inline-item"><a href="{% url 'blog:post_list' %}">Список постов</a></li>
                 {% if user.is_authenticated %}
                     <li class="list-inline-item"><a href="{% url 'users:logout' %}">Выйти</a></li>
                 {% else %}
