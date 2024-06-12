@@ -87,6 +87,7 @@ class ClientListView(ListView):
             queryset = Client.objects.all()
         else:
             queryset = Client.objects.filter(user=user)
+        queryset = Client.objects.all()
 
         return queryset
 

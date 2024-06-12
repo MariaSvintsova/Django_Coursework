@@ -51,7 +51,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for client in clients %}
+                {% for client in object_list %}
                     <tr>
                         <td>{{ client.id }}</td>
                         <td>{{ client.name }}</td>
@@ -60,7 +60,6 @@
                         <td>{{ client.user }}</td>
                         <td>
                             <a class="btn btn-primary btn-sm" href="{% url 'main:client_detail' client.id %}">Просмотр</a>
-                            <a class="btn btn-warning btn-sm" href="{% url 'main:client_update' client.id %}">Редактировать</a>
                             <a class="btn btn-danger btn-sm" href="{% url 'main:client_delete' client.id %}">Удалить</a>
                         </td>
                     </tr>
