@@ -64,6 +64,12 @@ class NewsLetter(models.Model):
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+        permissions = [
+            ('can_delete_newsletter', "Can delete newsletter"),
+            ('can_view_newsletter', "Can view newsletter"),
+            ('can_delete_user', "Can delete user"),
+            ('can_view_user', "Can view user")
+        ]
 
     def __str__(self):
         return f'Рассылка {self.pk}'

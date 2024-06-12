@@ -1,11 +1,11 @@
 from django.core.mail import send_mail
 from django.conf import settings
 import smtplib
-from main import apps
+from django.apps import apps
 
 
 def send_email(subject, message, recipient_list, newsletter):
-    SendAttempt = apps.get_model('main', 'SendAttempt')
+    SendAttempt = apps.get_model('main', 'SendAttemp')
     try:
         server_response = send_mail(
             subject,

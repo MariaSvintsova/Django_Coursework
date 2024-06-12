@@ -119,7 +119,11 @@
                 <li class="list-inline-item"><a href="{% url 'blog:post_form' %}">Создать пост</a></li>
                 <li class="list-inline-item"><a href="{% url 'blog:post_list' %}">Список постов</a></li>
                 {% if user.is_authenticated %}
-                    <li class="list-inline-item"><a href="{% url 'users:logout' %}">Выйти</a></li>
+                <form id="logout-form" action="{% url 'users:logout' %}" method="POST" style="display: none;">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="document.getElementById('logout-form').submit();">Выйти</a>
+<!--                    <li class="list-inline-item"><a href="{% url 'users:logout' %}">Выйти</a></li>-->
                 {% else %}
                     <li class="list-inline-item"><a href="{% url 'users:register' %}">Регистрация</a></li>
                     <li class="list-inline-item"><a href="{% url 'users:login' %}">Войти</a></li>

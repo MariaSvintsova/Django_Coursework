@@ -1,6 +1,5 @@
 import random
 import string
-
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.tokens import default_token_generator
@@ -9,13 +8,15 @@ from django.contrib.auth.views import LogoutView as AuthLogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import CreateView, UpdateView
 from django.core.mail import send_mail
 from django.contrib.auth import logout
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from rest_framework import request
+
 from config import settings
 from main.services import send_email
 from users.forms import UserProfileForm, UserRegisterForm, PasswordResetForm
@@ -38,14 +39,17 @@ class RegisterView(CreateView):
 
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        verification_link = self.request.build_absolute_uri(reverse('users:activate', args=[uid, token]))
+        verification_link = self.request.build_absolute_uri(reverse('users:account_activated'))
 
         user_email = user.email
         subject = "Подтверждение регистрации"
-        message = f"Добро пожаловать! Подтвердите вашу регистрацию по следующей ссылке: {verification_link}"
-        send_email(subject, message, [user_email])
+        message = f"Добро пожаловать! Подтвердите вашу регистрацию по следующей ссылке: {verification_link}?uid={uid}&token={token}"
+        send_email(subject, message, [user_email], newsletter=None)
 
         return super().form_valid(form)
+
+
+
 
 
 
@@ -103,10 +107,10 @@ class PasswordResetView(View):
             new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
             user.password = make_password(new_password)
             user.save()
-
-            subject = 'Восстановление пароля',
-            message = f'Ваш новый пароль: {new_password}',
-            send_email(subject, message, [email])
+            #
+            # subject = 'Восстановление пароля',
+            # message = f'Ваш новый пароль: {new_password}',
+            # send_email(subject, message, [email])
 
             return render(request, 'users/password_reset_done.html')
         except User.DoesNotExist:
