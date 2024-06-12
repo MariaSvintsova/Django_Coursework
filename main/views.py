@@ -104,7 +104,10 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     model = Client
     form_class = ClientForm
     template_name = 'main/client_form.html'
-    success_url = reverse_lazy('main:сlient_list')
+    success_url = reverse_lazy('main:client_list')
+
+    def get_success_url(self):
+        return reverse_lazy('users:register_success')
 
     def form_valid(self, form):
         client = form.save(commit=False)

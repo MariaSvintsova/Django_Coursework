@@ -107,11 +107,14 @@ class PasswordResetView(View):
             new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
             user.password = make_password(new_password)
             user.save()
-            #
-            # subject = 'Восстановление пароля',
-            # message = f'Ваш новый пароль: {new_password}',
-            # send_email(subject, message, [email])
+
+            subject = 'Восстановление пароля',
+            message = f'Ваш новый пароль: {new_password}',
+            send_email(subject, message, [email])
 
             return render(request, 'users/password_reset_done.html')
         except User.DoesNotExist:
             return render(request, 'users/password_reset.html', {'error': 'Пользователь с таким email не найден.'})
+
+class AccountActivatedView(View):
+    template_name = 'users/account_activated.html'
