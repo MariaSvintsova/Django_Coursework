@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if view.object.pk %}Редактирование рассылки{% else %}Создание рассылки{% endif %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {% if view.object.pk %}Редактирование рассылки{% else %}Создание рассылки{% endif %}
+{% endblock %}
+
+
+{% block content %}
     <div class="container mt-5">
         <h1>{% if view.object.pk %}Редактирование рассылки{% else %}Создание рассылки{% endif %}</h1>
         <form method="post">
@@ -16,5 +15,5 @@
             <a href="{% url 'main:newsletter_list' %}" class="btn btn-secondary">Отмена</a>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
+

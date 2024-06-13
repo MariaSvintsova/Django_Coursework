@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'main/base.html' %}
+
+{% block title %}
     <title>Вы уверены, что хотите удалить товар?</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     <div class="container">
         <h1>Вы уверены, что хотите удалить товар?</h1>
         <div class="actions">
@@ -15,5 +15,4 @@
             <a href="{% url 'main:newsletter_detail' object.id %}" class="cancel-btn">Отмена</a>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

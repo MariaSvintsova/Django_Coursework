@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Вы уверены, что хотите удалить клиента?</title>
-</head>
+{% extends 'main/base.html' %}
+
+{% block title %}
+   <title>Вы уверены, что хотите удалить клиента?</title>
+{% endblock %}
+
+{% block content %}
 <body>
     <div class="container">
         <h1>Вы уверены, что хотите удалить клиента?</h1>
@@ -16,4 +17,4 @@
         </div>
     </div>
 </body>
-</html>
+{% endblock %}

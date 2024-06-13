@@ -1,4 +1,11 @@
-<h2>Список постов</h2>
+{% extends 'main/base.html' %}
+
+{% block title %}
+   <title>Список постов</title>
+{% endblock %}
+
+
+{% block content %}
 <ul>
   {% for post in object_list %}
     <li><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></li>
@@ -6,3 +13,5 @@
     <li>No posts yet.</li>
   {% endfor %}
 </ul>
+
+{% endblock %}
