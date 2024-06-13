@@ -97,7 +97,7 @@
                                 <td>{{ newsletter.client }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" href="{% url 'main:newsletter_detail' newsletter.id %}">Просмотр</a>
-                                    <a class="btn btn-warning btn-sm" href="{% url 'main:newsletter_form' newsletter.id %}">Редактировать</a>
+                                    <a class="btn btn-warning btn-sm" href="{% url 'main:newsletter_form' %}">Редактировать</a>
                                     <a class="btn btn-danger btn-sm" href="{% url 'main:newsletter_delete' newsletter.id %}">Удалить</a>
                                 </td>
                             </tr>

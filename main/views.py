@@ -96,7 +96,7 @@ class ClientDetailView(LoginRequiredMixin, DetailView):
     """ Client detail edpoint """
 
     model = Client
-    template_name = 'client_detail.html'
+    template_name = 'main/client_detail.html'
     success_url = reverse_lazy('main:client_list')
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
@@ -122,8 +122,8 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
     model = Client
     form_class = ClientForm
-    template_name = 'client_form.html'
-    success_url = reverse_lazy('main:сlient_list')
+    template_name = 'main/client_form.html'
+    success_url = reverse_lazy('main:client_list')
 
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):
@@ -131,7 +131,7 @@ class ClientDeleteView(LoginRequiredMixin, DeleteView):
 
     model = Client
     template_name = 'client_form.html'
-    success_url = reverse_lazy('main:сlient_list')
+    success_url = reverse_lazy('main:client_list')
 
 class SendAttempListView(ListView):
     """ SendAttemps list edpoint """
