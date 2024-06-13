@@ -1,6 +1,6 @@
 <h2>Список постов</h2>
 <ul>
-  {% for post in posts %}
+  {% for post in object_list %}
     <li><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></li>
   {% empty %}
     <li>No posts yet.</li>
